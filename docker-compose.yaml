@@ -1,0 +1,32 @@
+version: "3.9"
+
+services:
+  api:
+    build:
+      context: .
+    environment:
+      PORT: 3000
+      DB_HOST: db
+      DB_PORT: 5432
+      DB_USER: postgres
+      DB_PASS: postgres
+      DB_NAME: triptik
+    ports:
+      - 3000:3000
+    volumes:
+      - db-volume:/var/lib/postgresql/data
+      - ./src:/app/src
+    depends_on:
+      - db
+    restart: on-failure
+    command: "npm run start-dev"
+
+  db:
+    image: postgres
+    environment:
+      POSTGRES_DB: triptik
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: postgres
+
+volumes:
+  db-volume:

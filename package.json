@@ -1,0 +1,35 @@
+{
+  "name": "triptik",
+  "version": "1.0.0",
+  "description": "Directions API server for Rides",
+  "main": "src/index.js",
+  "scripts": {
+    "start": "node src/index.js",
+    "start-dev": "nodemon",
+    "build": "docker build . -t gcr.io/mta-music-318515/triptik:latest",
+    "push": "docker push gcr.io/mta-music-318515/triptik:latest",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Pizza-Ratz/Triptik.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "CCC Zero 1.0",
+  "bugs": {
+    "url": "https://github.com/Pizza-Ratz/Triptik/issues"
+  },
+  "homepage": "https://github.com/Pizza-Ratz/Triptik#readme",
+  "dependencies": {
+    "cors": "^2.8.5",
+    "express": "^4.17.1",
+    "node-fetch": "^2.6.1",
+    "pg": "^8.6.0",
+    "sequelize": "^6.6.5"
+  },
+  "devDependencies": {
+    "nodemon": "^2.0.12",
+    "prettier": "^2.3.2"
+  }
+}
