@@ -1,0 +1,20 @@
+steps:
+  - name: docker
+    id: Build
+    args: ["build", ".", "-t", "gcr.io/mta-music-318515/triptik:$REVISION_ID"]
+  - name: "docker"
+    id: Push
+    args: ["push", "gcr.io/mta-music-318515/triptik:$REVISION_ID"]
+  - name: "gcr.io/cloud-builders/kubectl"
+    id: Deploy
+    dir: .kube
+    args:
+      [
+        "set",
+        "image",
+        "deployment/triptik-staging",
+        "triptik=gcr.io/mta-music-318515/triptik:$REVISION_ID",
+      ]
+    env:
+      - "CLOUDSDK_COMPUTE_ZONE=us-central1-c"
+      - "CLOUDSDK_CONTAINER_CLUSTER=production-1"
