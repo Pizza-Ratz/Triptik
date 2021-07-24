@@ -11,6 +11,7 @@ services:
       DB_USER: postgres
       DB_PASS: postgres
       DB_NAME: triptik
+      DEBUG: app:*
     ports:
       - 3000:3000
     volumes:

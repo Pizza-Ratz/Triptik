@@ -9,4 +9,4 @@ RUN npm install
 
 CMD [ "npm", "start" ]
 
-HEALTHCHECK --interval=15s --timeout=15s --start-period=5s --retries=3 CMD [ "wget -O - localhost/healthcheck" ]
+# HEALTHCHECK --interval=15s --timeout=15s --start-period=5s --retries=3 CMD [ "wget -O - localhost/healthcheck" ]
