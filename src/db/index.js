@@ -15,6 +15,7 @@ const sequelize = new Sequelize({
   username: DB_USER,
   password: DB_PASS,
   database: DB_NAME,
+  logging: false,
 });
 
 sequelize.ready = false;
@@ -53,7 +54,7 @@ async function relate() {
 verify()
   .then(create)
   .then(relate)
-  .then(() => sequelize.sync({ force: true }))
+  .then(() => sequelize.sync())
   .then(() => (sequelize.ready = true));
 
 module.exports = sequelize;

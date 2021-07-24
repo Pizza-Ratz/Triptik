@@ -1,7 +1,7 @@
 const express = require("express");
 const cors = require("cors");
 const sequelize = require("./db");
-const routes = require("./routes");
+const debug = require("debug")("app");
 
 const app = express();
 
@@ -15,7 +15,8 @@ const corsOptions = {
 };
 
 app.use(cors(corsOptions));
-app.use(routes);
+app.use("/", require("./routes/healthz"));
+app.use("/api/v1", require("./routes/directions"));
 
 function pollSequelizeReady() {
   let spinTimer = 0;
@@ -42,6 +43,13 @@ pollSequelizeReady().then(() => {
   server.on("close", () => {
     console.info("closing connections");
     sequelize.close();
+  });
+
+  process.on("SIGTERM", () => {
+    console.info("SIGTERM signal received");
+    server.close(() => {
+      debug("HTTP server closed");
+    });
   });
 });
 
